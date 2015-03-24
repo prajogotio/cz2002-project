@@ -1,0 +1,9 @@
+Object Oriented Design Lecture
+LT 8
+60
+FS45
+TR 8
+5
+G200
+Software Lab 3
+40
