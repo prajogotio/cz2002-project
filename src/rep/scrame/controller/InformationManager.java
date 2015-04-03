@@ -310,7 +310,7 @@ public class InformationManager {
     public Student createNewStudent(String firstName, String lastName, String NRIC, String dateOfBirthString, String address, String phoneNumber, String dateOfEnrollmentString, String matriculationNumber, String facultyId) {
 
         Calendar dateOfBirth = DateAdapter.getCalendar(dateOfBirthString);
-        Calendar dateOfEnrollment = DateAdapter.getCalendar("00/"+dateOfEnrollmentString);
+        Calendar dateOfEnrollment = DateAdapter.getCalendar("01/"+dateOfEnrollmentString);
 
         Faculty faculty = null;
         if(!facultyId.isEmpty()) faculty = getFacultyById(checkedParseInt(facultyId));
