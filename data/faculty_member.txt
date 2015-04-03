@@ -4,7 +4,7 @@ G0139194F
 02/02/1968
 18 Nanyang Hill, Singapore
 82847234
-1
+2
 2
 Rui
 Fan
@@ -13,4 +13,36 @@ G0182381A
 20 Nanyang Avenue, Singapore
 8818888
 2
+2
+Cai
+Wentong
+G0128348R
+01/04/1958
+N4-02b-62
+6790 4054
+0
+2
+Sourin
+Alexei
+S01993184F
+08/11/1944
+N4-02a-10
+6790 4292
+0
+3
+Ke
+Yiping
+S0839183V
+19/10/1974
+N4-02a-10
+6790 5046
+1
+3
+He
+Bing Sheng
+G0134188J
+23/05/1983
+N4-03a-10
+6790 5146
+3
 2

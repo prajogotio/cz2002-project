@@ -324,7 +324,7 @@ public class InformationManager {
         return student;
     }
 
-    public FacultyMember createNewFacultyMember(String firstName, String lastName, String NRIC, String dateOfBirthString, String address, String phoneNumber,  String facultyId, String status) {
+    public FacultyMember createNewFacultyMember(String firstName, String lastName, String NRIC, String dateOfBirthString, String address, String phoneNumber, String status, String facultyId) {
         Calendar dateOfBirth = DateAdapter.getCalendar(dateOfBirthString);
 
         Faculty faculty = null;
