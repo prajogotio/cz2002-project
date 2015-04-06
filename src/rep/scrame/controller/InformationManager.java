@@ -83,7 +83,7 @@ public class InformationManager {
         PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter("data/assessment.txt")));
         for (Assessment assessment : assessments) {
             printWriter.println(assessment.getName());
-            printWriter.println(assessment.getWeightage());
+            printWriter.format("%3.5f\n", assessment.getWeightage());
         }
         printWriter.close();
     }
@@ -374,7 +374,7 @@ public class InformationManager {
     }
 
     public Assessment createNewAssessment(String name, String weightageString) {
-        double weightage = (double) checkedParseInt(weightageString);
+        double weightage = checkedParseDouble(weightageString);
         return addNewAssessment(name, weightage);
     }
 

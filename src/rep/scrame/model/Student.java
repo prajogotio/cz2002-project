@@ -54,5 +54,8 @@ public class Student extends Person{
         return dateOfEnrollmentString;
     }
 
+    public void setDateOfEnrollment(int date, int month, int year) {
+    	dateOfEnrollment.set(year, month, date);
+    }
 
 }

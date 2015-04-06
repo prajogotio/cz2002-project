@@ -1,14 +1,32 @@
 Exam
-0.0
+50.00000
 Continual Assessment
-0.0
+80.00000
 Group Project
-0.0
+20.00000
 Exam
-0.0
+60.00000
 Continual Assessment
-0.0
+30.00000
 Quiz
-0.0
+30.00000
 Group Project
-0.0
+40.00000
+Exam
+55.00000
+Class Participation
+40.00000
+Lab Work
+60.00000
+Exam
+70.00000
+Continual Assessment
+15.00000
+Class Participation
+5.00000
+Lab Report
+20.00000
+Project Work
+50.00000
+Quiz
+10.00000

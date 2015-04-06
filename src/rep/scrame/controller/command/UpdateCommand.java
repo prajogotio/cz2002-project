@@ -1,9 +1,11 @@
 package rep.scrame.controller.command;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import rep.scrame.controller.DateAdapter;
 import rep.scrame.controller.InformationManager;
 import rep.scrame.controller.SystemScannerAdapter;
 import rep.scrame.model.Assessment;
@@ -21,38 +23,106 @@ public class UpdateCommand implements Command {
     @Override
     public void invoke(CommandInterpreter context, StringTokenizer tokens) {
         if (!tokens.hasMoreTokens()) {
-            System.out.println("Command does not match any recognised use case: update [student | course | faculty-member | mark] id");
+        	displayErrorMessage();
             return;
         }
         String domain = tokens.nextToken();
-        if (domain.equals("mark")) {
+        if (domain.equals("-m")) {
             updateMarkRecord();
             return;
         }
 
         if (!tokens.hasMoreTokens()) {
-            System.out.println("Command does not match any recognised use case: update [student | course | faculty-member | mark] id");
+        	displayErrorMessage();
             return;
         }
         String id = tokens.nextToken();
-        if (domain.equals("student")) {
+        if (domain.equals("-s")) {
             updateStudentInformationDialog(id);
-        } else if (domain.equals("course")) {
+        } else if (domain.equals("-c")) {
             updateCourseInformationDialog(id);
-        } else if (domain.equals("faculty-member")) {
-            updateFacultyMemberDialog(id);
         } else {
-            System.out.println("Command does not match any recognised use case: update [student | course | faculty-member] id");
+        	displayErrorMessage();
         }
     }
 
+    private void displayErrorMessage() {
+        System.out.println("Command does not match any recognised use case: upd [-s | -c | -m] id");
+    }
+    
     private void updateStudentInformationDialog(String idString) {
-        // not implemented yet
+        int id = InformationManager.checkedParseInt(idString);
+        Student student = InformationManager.getInstance().getStudentById(id);
+        if (student != null) {
+        	boolean completed = false;
+        	while (!completed) {
+        		System.out.format("\nUpdate student information.\n");
+        		System.out.format("Name       : %s %s\n", student.getFirstName(), student.getLastName());
+        		System.out.format("Matric. No.: %s\n", student.getMatriculationNumber());
+        		System.out.format("Choose the following options:\n");
+        		System.out.println("1. Update address");
+        		System.out.println("2. Update date of birth");
+        		System.out.println("3. Update date of enrollment");
+        		System.out.println("4. Update faculty");
+        		System.out.println("5. Back");
+        		Scanner scanner = SystemScannerAdapter.getInstance();
+                String choice = scanner.nextLine();
+                if (choice.equals("1")) {
+                    updateStudentAddress(student);
+                } else if (choice.equals("2")) {
+                    updateStudentDateOfBirth(student);
+                } else if (choice.equals("3")) {
+                    updateStudentDateOfEnrollment(student);
+                } else if (choice.equals("4")) {
+                    updateStudentFaculty(student);
+                } else {
+                	break;
+                }
+        	}
+        }
+    }
+    
+    private void updateStudentAddress(Student student) {
+    	System.out.format("Current addresss : %s\n", student.getAddress());
+    	System.out.format("New address      : ");
+    	Scanner scanner = SystemScannerAdapter.getInstance();
+    	String input = scanner.nextLine();
+    	student.setAddress(input);
+    	System.out.println("Student address has been successfully updated.");
+    }
+    
+    private void updateStudentDateOfBirth(Student student) {
+    	System.out.format("Current date of birth            : %s\n", student.getDateOfBirthAsString());
+    	System.out.format("Set date of birth to (dd/mm/yyyy): ");
+    	Scanner scanner = SystemScannerAdapter.getInstance();
+    	String input = scanner.nextLine();
+    	Calendar newDate = DateAdapter.getCalendar(input);
+    	student.setDateOfBirth(newDate.get(Calendar.DAY_OF_MONTH), newDate.get(Calendar.MONTH), newDate.get(Calendar.YEAR));
+    	System.out.println("Student date of birth has been successfully updated.");
+    }
+    
+    private void updateStudentDateOfEnrollment(Student student) {
+    	System.out.format("Current date of enrollment            : %s\n", student.getDateOfEnrollmentAsString());
+    	System.out.format("Set date of enrollment to (mm/yyyy)   : ");
+    	Scanner scanner = SystemScannerAdapter.getInstance();
+    	String input = scanner.nextLine();
+    	Calendar newDate = DateAdapter.getCalendar("01/"+input);
+    	student.setDateOfEnrollment(newDate);
+    	System.out.println("Student date of enrollment has been successfully updated.");
     }
 
-    private void updateFacultyMemberDialog(String idString) {
-        // not implemented yet
+    private void updateStudentFaculty(Student student) {
+    	System.out.format("Current faculty    : %s\n", student.getFaculty().getName());
+    	System.out.format("Enter the faculty of student's new faculty:\n");
+    	CommandInterpreter.getInstance().parseStringToCommand("list faculties");
+    	System.out.format("Choice of faculty by id: ");
+    	Scanner scanner = SystemScannerAdapter.getInstance();
+    	String input = scanner.nextLine();
+    	int id = InformationManager.checkedParseInt(input);
+    	student.setFaculty(InformationManager.getInstance().getFacultyById(id));
+    	System.out.println("Student faculty has been successfully updated.");
     }
+    
 
 
     private void updateCourseInformationDialog(String idString) {
@@ -70,7 +140,7 @@ public class UpdateCommand implements Command {
                 System.out.println("4. Add/Update lecture");
                 System.out.println("5. Add tutorial group");
                 System.out.println("6. Add lab group");
-                System.out.println("7. Cancel");
+                System.out.println("7. Back");
                 System.out.print("Enter option number: ");
                 Scanner scanner = SystemScannerAdapter.getInstance();
                 String choice = scanner.nextLine();

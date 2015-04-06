@@ -6,12 +6,13 @@ import java.util.StringTokenizer;
 
 import rep.scrame.controller.InformationManager;
 import rep.scrame.controller.SystemScannerAdapter;
-import rep.scrame.model.Assessment;
 import rep.scrame.model.Course;
-import rep.scrame.model.CourseGrading;
 import rep.scrame.model.CourseSession;
-import rep.scrame.model.MarkRecord;
 import rep.scrame.model.Student;
+import rep.scrame.view.CourseStatistic;
+import rep.scrame.view.ScrameView;
+import rep.scrame.view.SessionStudentList;
+import rep.scrame.view.StudentTranscript;
 
 
 public class GetCommand implements Command {
@@ -25,9 +26,9 @@ public class GetCommand implements Command {
             printErrorMessage();
             return;
         }
-        if (command.equals("student-transcript")) {
+        if (command.equals("-t")) {
             getStudentTranscipt(context, tokens);
-        } else if (command.equals("course-enrollment")) {
+        } else if (command.equals("-s")) {
             getCourseInformation(context, tokens);
         } else {
             printErrorMessage();
@@ -35,7 +36,7 @@ public class GetCommand implements Command {
     }
 
     private void printErrorMessage() {
-        System.out.println("Command does not match any recognised use case: get [ student-transcipt | course-enrollment] id");
+        System.out.println("Command does not match any recognised use case: get [ -t | -s] id");
     }
 
 
@@ -53,42 +54,8 @@ public class GetCommand implements Command {
             System.out.println("student id is not valid.");
             return;
         }
-        System.out.println("========================================================");
-        System.out.println("                 Student Transcript");
-        System.out.println("========================================================");
-        System.out.println("Student name : " + student.getFirstName() + " " + student.getLastName());
-        System.out.println("Faculty      : " + (student.getFaculty() == null? "" : student.getFaculty().getName()));
-        System.out.println();
-        ArrayList<Course> courses = student.getCourseRegistered();
-        for (Course course : courses) {
-            CourseGrading courseGrading = course.getCourseGrading();
-            if(courseGrading == null) continue;
-            MarkRecord markRecord = courseGrading.getStudentMarkRecord(student);
-            Assessment exam = courseGrading.getExam();
-            ArrayList<Assessment> courseWork = courseGrading.getCourseWork();
-            double examMark = markRecord.getAssessmentMark(exam);
-            double overallMark = examMark * exam.getWeightage() / 100.0;
-            double courseWorkOverallMark = 0;
-            ArrayList<Double> courseWorkMarks = new ArrayList<Double>();
-            for (Assessment assessment : courseWork) {
-                courseWorkMarks.add(markRecord.getAssessmentMark(assessment));
-                overallMark += courseWorkMarks.get(courseWorkMarks.size()-1) * assessment.getWeightage() * (100.0 - exam.getWeightage()) / 10000.0;
-                courseWorkOverallMark += courseWorkMarks.get(courseWorkMarks.size()-1) * assessment.getWeightage() / 100.0;
-            }
-            System.out.println("Course title     : " + course.getName());
-            System.out.println("Course code      : " + course.getCourseCode());
-            System.out.format("Overall mark     : %.2f\n", overallMark);
-            System.out.format("Exam mark        : %.2f\n", examMark);
-            System.out.format("Coursework overall mark : %.2f\n", courseWorkOverallMark);
-            if (courseWork.size() > 1) {
-                System.out.println("Coursework mark break down:\n");
-                for (int i = 0; i < courseWork.size(); ++i) {
-                    System.out.format("    %-20s : %.2f\n", courseWork.get(i).getName(), courseWorkMarks.get(i));
-                }
-                System.out.println();
-            }
-            System.out.println();
-        }
+        ScrameView transcript = new StudentTranscript(student);
+        transcript.display();
     }
 
     public void getCourseInformation(CommandInterpreter context, StringTokenizer tokens) {
@@ -107,21 +74,50 @@ public class GetCommand implements Command {
         }
 
         System.out.println("Choose one of the following options:");
-        System.out.println("1. List of students enrolled in the lecture session");
-        System.out.println("2. List of students enrolled in a tutorial session");
-        System.out.println("3. List of students enrolled in a lab session");
-        System.out.println("4. Cancel");
+        System.out.println("1. Student lists (enrollment and waitlist)" );
+        System.out.println("2. List of students enrolled in the lecture session");
+        System.out.println("3. List of students enrolled in a tutorial session");
+        System.out.println("4. List of students enrolled in a lab session");
+        System.out.println("5. Get course statistic");
+        System.out.println("6. Cancel");
         System.out.print("choice number: ");
         Scanner scanner = SystemScannerAdapter.getInstance();
         String choice = scanner.nextLine();
         if(choice.equals("1")) {
+        	displayStudentList(course);
+    	} else if(choice.equals("2")) {
             CourseSession lecture = course.getLecture();
             displayStudentList(lecture);
-        } else if (choice.equals("2")) {
-            chooseCourseSession(course, "tutorial");
         } else if (choice.equals("3")) {
+            chooseCourseSession(course, "tutorial");
+        } else if (choice.equals("4")) {
             chooseCourseSession(course, "lab");
+        } else if (choice.equals("5")) {
+        	displayCourseStatistic(course);
         }
+    }
+    
+    private void displayStudentList(Course course) {
+    	ArrayList<Student> enrolled = course.getEnrolledStudents();
+    	ArrayList<Student> waitlist = course.getWaitList();
+    	System.out.format("\n%s - %s\n", course.getCourseCode(), course.getName());
+    	System.out.format("\nEnrolled students:            (size: %3d)\n", enrolled.size());
+    	System.out.println("________________________________________");
+    	System.out.println(" id    name");
+    	System.out.println("----------------------------------------");
+    	for (Student student : enrolled) {
+    		System.out.format("%3d %-40s\n", InformationManager.getInstance().getId(student), student.getFirstName() + " " + student.getLastName());
+    	}
+    	
+    	
+    	System.out.format("\n\nStudents on waitlist:            (size: %3d)\n", waitlist.size());
+    	System.out.println("________________________________________");
+    	System.out.println(" id    name");
+    	System.out.println("----------------------------------------");
+    	for (Student student : waitlist) {
+    		System.out.format("%3d %-40s\n", InformationManager.getInstance().getId(student), student.getFirstName() + " " + student.getLastName());
+    	}
+    	
     }
 
     private void chooseCourseSession(Course course, String type) {
@@ -155,23 +151,12 @@ public class GetCommand implements Command {
             System.out.println("The course does not have the requested session.");
             return;
         }
-        System.out.println();
-        System.out.println("Session name            : " + courseSession.getName());
-        System.out.println("Session venue           : " + courseSession.getLocation());
-        System.out.println("Capacity                : " + courseSession.getCapacity());
-        System.out.println("Total students enrolled : " + courseSession.getEnrolledStudents().size());
-        System.out.println("Available slots         : " + (courseSession.getCapacity() - courseSession.getEnrolledStudents().size()));
-        ArrayList<Student> students = courseSession.getEnrolledStudents();
-        if (students.isEmpty()) {
-            System.out.println("There are currently no students enrolled in this session.");
-        } else {
-            System.out.println("      Students enrolled in this session");
-            System.out.println("  id  Name                                        Matric. no.           Faculty name");
-            System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-            for (Student student : students) {
-                System.out.format("%4d  %-42s  %-20s  %-51s\n", InformationManager.getInstance().getId(student), student.getFirstName() + ", " +student.getLastName(), student.getMatriculationNumber(), (student.getFaculty() == null ? " " : student.getFaculty().getName()));
-            }
-        }
-        System.out.println();
+        ScrameView studentList = new SessionStudentList(courseSession);
+        studentList.display();
+    }
+    
+    private void displayCourseStatistic(Course course) {
+    	ScrameView courseStatistic = new CourseStatistic(course);
+    	courseStatistic.display();
     }
 }

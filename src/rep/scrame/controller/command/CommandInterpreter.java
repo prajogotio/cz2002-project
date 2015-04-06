@@ -52,10 +52,10 @@ public class CommandInterpreter {
         commandLookUp.put("display-home-screen", new DisplayHomeScreenCommand());
         commandLookUp.put("help", new HelpCommand());
         commandLookUp.put("quit", new QuitCommand());
-        commandLookUp.put("list", new ListCommand());
+        commandLookUp.put("ls", new ListCommand());
         commandLookUp.put("add", new AddCommand());
-        commandLookUp.put("view", new ViewCommand());
-        commandLookUp.put("update", new UpdateCommand());
+        commandLookUp.put("vw", new ViewCommand());
+        commandLookUp.put("upd", new UpdateCommand());
         commandLookUp.put("get", new GetCommand());
     }
 }

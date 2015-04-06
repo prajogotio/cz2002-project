@@ -28,20 +28,25 @@ public class ListCommand implements Command {
         if(tokens.hasMoreTokens()) {
             domain = tokens.nextToken();
         } else {
-            System.out.println("Command does not match any recognised use case: list [students | courses | faculties | faculty-members]");
+        	displayErrorMessage();
             return;
         }
 
-        if (domain.equals("students")) {
+        if (domain.equals("-s")) {
         	studentListView.display();
-        } else if (domain.equals("courses")) {
+        } else if (domain.equals("-c")) {
             courseListView.display();
-        } else if (domain.equals("faculties")) {
+        } else if (domain.equals("-f")) {
         	facultyListView.display();
-        } else if (domain.equals("faculty-members")) {
+        } else if (domain.equals("-fm")) {
             facultyMemberListView.display();
         } else {
-            System.out.println("Command does not match any recognised use case: list [students | courses | faculties | faculty-members]");
+            displayErrorMessage();
         }
+    }
+    
+    private void displayErrorMessage() {
+        System.out.println("Command does not match any recognised use case: ls [-s | -c | -f | -fm]");
+
     }
 }

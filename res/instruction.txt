@@ -4,21 +4,21 @@
 List of recognised commands:
 
 
-list [students | courses | faculties | faculty-members]
+ls [-s | -c | -f | -fm]
         List down all students/courses/faculties/faculty-members currently registered 
         with the system.
 
-add [student | course | faculty-member]
+add [-s | -c | -fm]
         Invoke dialog for adding a new student/course/faculty-member.
 
-view [student | course | faculty-member | faculty] id
+vw [-s | -c | -fm | -f] id
         Invoke dialog for viewing a particular student/course/faculty-member/faculty.
 
-update [student | course | faculty-member | mark] id
-		Invoke dialog for updating a particular student/course/faculty-member/mark.
+upd [-s | -c | -m] id
+		Invoke dialog for updating a particular student/course/mark.
 
-get [ student-transcipt | course-enrollment ] id
-		Get student transcipt, course-enrollment, and other information from the system.
+get [ -t | -s ] id
+		Get student transcript, course-enrollment, and other information from the system.
 
 quit
-        Quit the system
+        Quit the system. 

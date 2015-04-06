@@ -14,25 +14,29 @@ import rep.scrame.model.FacultyMember;
 public class AddCommand implements Command {
     private CommandInterpreter context;
 
+    private void displayErrorMessage() {
+        System.out.println("Command does not match any recognised use case: add [-s | -c | -fm]");
+    }
+    
     @Override
     public void invoke(CommandInterpreter context, StringTokenizer tokens) {
         String domain;
         if(tokens.hasMoreTokens()) {
             domain = tokens.nextToken();
         } else {
-            System.out.println("Command does not match any recognised use case: add [student | course | faculty-member]");
+        	displayErrorMessage();
             return;
         }
         this.context = context;
 
-        if(domain.equals("student")) {
+        if(domain.equals("-s")) {
             displayAddStudentDialog();
-        } else if (domain.equals("course")) {
+        } else if (domain.equals("-c")) {
             displayAddCourseDialog();
-        } else if (domain.equals("faculty-member")) {
+        } else if (domain.equals("-fm")) {
             displayAddFacultyMemberDialog();
         } else {
-            System.out.println("Command does not match any recognised use case: add [student | course | faculty-member]");
+        	displayErrorMessage();
         }
     }
 

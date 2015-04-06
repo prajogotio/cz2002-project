@@ -7,3 +7,12 @@ TR 8
 G200
 Software Lab 3
 40
+Group 1
+Hall 8
+200
+Lecture
+LT 24
+50
+T4
+Hall 12
+12

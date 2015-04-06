@@ -40,4 +40,13 @@ public class Person {
         String dateOfBirthAsString = dateFormatter.format(getDateOfBirth().getTime());
         return dateOfBirthAsString;
     }
+    
+    public void setAddress(String address) {
+    	particulars.setAddress(address);
+    }
+    
+    public void setDateOfBirth(int date, int month, int year) {
+    	particulars.setDateOfBirth(date, month, year);
+    }
+    
 }
