@@ -11,5 +11,7 @@
      \__\/         \__\/         \__\/         \__\/         \__\/         \__\/    
                     Student Course Registration And Mark Entry
                  By Prajogo Tio, Chin Jieh, Nigel Kong and You Wei
-                      Nanyang Technological Univeristy 2015
+                      Nanyang Technological University 2015
 ======================================================================================
+Welcome to SCRAME!
+First-time user? Enter 'help' to bring up the help menu.
