@@ -49,7 +49,7 @@ public class AddCommand implements Command {
         System.out.print("Course Code: ");
         String courseCode = scanner.nextLine();
         System.out.print("Enter the faculty for which the course belongs to\n");
-        context.parseStringToCommand("list faculties");
+        context.parseStringToCommand("ls -f");
         System.out.print("faculty id: ");
         String facultyId = scanner.nextLine();
         System.out.print("Academic Unit: ");
@@ -85,7 +85,7 @@ public class AddCommand implements Command {
         System.out.print("Matriculation number: ");
         String matriculationNumber = scanner.nextLine();
         System.out.println("Enter the Faculty by id:");
-        context.parseStringToCommand("list faculties");
+        context.parseStringToCommand("ls -f");
         System.out.print("faculty id: ");
         String facultyId = scanner.nextLine();
 
@@ -109,7 +109,7 @@ public class AddCommand implements Command {
         System.out.print("Phone number: ");
         String phoneNumber = scanner.nextLine();
         System.out.println("Enter the Faculty by id:");
-        context.parseStringToCommand("list faculties");
+        context.parseStringToCommand("ls -f");
         System.out.print("faculty id: ");
         String facultyId = scanner.nextLine();
         System.out.println("Enter member's position:");

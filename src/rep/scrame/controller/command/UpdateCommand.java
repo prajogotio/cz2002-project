@@ -114,7 +114,7 @@ public class UpdateCommand implements Command {
     private void updateStudentFaculty(Student student) {
     	System.out.format("Current faculty    : %s\n", student.getFaculty().getName());
     	System.out.format("Enter the faculty of student's new faculty:\n");
-    	CommandInterpreter.getInstance().parseStringToCommand("list faculties");
+    	CommandInterpreter.getInstance().parseStringToCommand("ls -f");
     	System.out.format("Choice of faculty by id: ");
     	Scanner scanner = SystemScannerAdapter.getInstance();
     	String input = scanner.nextLine();
