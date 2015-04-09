@@ -60,7 +60,7 @@ public class AddCommand implements Command {
         System.out.print("Course is successfully registered.\nDo you want to add the particulars regarding the course now? (y/n) ");
         String response = scanner.nextLine();
         if(response.toLowerCase().equals("y") || response.toLowerCase().equals("yes")) {
-            context.parseStringToCommand("update course " + InformationManager.getInstance().getId(course));
+            context.parseStringToCommand("upd -c " + InformationManager.getInstance().getId(course));
         }
     }
 
@@ -90,6 +90,7 @@ public class AddCommand implements Command {
         String facultyId = scanner.nextLine();
 
         InformationManager.getInstance().createNewStudent(firstName, lastName, NRIC, dateOfBirth, address, phoneNumber, dateOfEnrollment, matriculationNumber, facultyId);
+        System.out.println("Student added successfully.");
     }
 
     private void displayAddFacultyMemberDialog() {
@@ -124,6 +125,7 @@ public class AddCommand implements Command {
         String status = scanner.nextLine();
 
         InformationManager.getInstance().createNewFacultyMember(firstName, lastName, NRIC, dateOfBirth, address, phoneNumber, facultyId, status);
+        System.out.println("Faculty member added successfully.");
     }
 
 

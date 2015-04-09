@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import rep.scrame.controller.InformationManager;
 import rep.scrame.model.Course;
 
-public class CourseListView implements ScrameView{
+public class CourseListView extends ListView{
 
-	public CourseListView() {}
+	public CourseListView() {super(InformationManager.getInstance().getCourses());}
 	
+	/*
 	@Override
 	public void display() {
 		System.out.println();
@@ -23,5 +24,24 @@ public class CourseListView implements ScrameView{
             System.out.format("%4d  %-10s %-50s  %-4d  %-4d     %-51s\n", id++, course.getCourseCode(), course.getName(), course.getAcademicUnit(), course.getCapacity(), facultyName);
         }
 	}
+	*/
+	
+	@Override
+	protected String formatHeader(){
+		String result = String.format("  id  Code        Title                                             AU  capacity     Faculty\n"
+				+ "----------------------------------------------------------------------------------------------------------------------------------------------------");
+		return result;
+	}
+	
+	@Override
+	protected String formatLine(){
+		ArrayList<Course> courses = InformationManager.getInstance().getCourses();
+		String facultyName = "";
+		Course course = courses.get(currentIndex);
+        if(course.getFaculty() != null) facultyName = course.getFaculty().getName();
+        String result = String.format("%4d  %-10s %-50s  %-4d  %-4d     %-51s", currentIndex, course.getCourseCode(), course.getName(), course.getAcademicUnit(), course.getCapacity(), facultyName);
+        return result;
+	}
+
 
 }
