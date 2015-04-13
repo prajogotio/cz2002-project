@@ -13,6 +13,9 @@ import rep.scrame.view.FacultyMemberInformationView;
 import rep.scrame.view.ScrameView;
 import rep.scrame.view.StudentInformationView;
 
+/**
+ * Manages a detailed view of a particular entity once invoked.
+ */
 public class ViewCommand implements Command {
 
 
@@ -41,11 +44,18 @@ public class ViewCommand implements Command {
         }
     }
 
+    /**
+     * Displays an error message.
+     */
     private void displayErrorMessage() {
         System.out.println("Command does not match any recognised use case: vw [-s | -c | -fm | -f] id");
 
     }
     
+    /**
+     * Views a student information.
+     * @param idString	Id of the student.
+     */
     private void viewStudentInformation(String idString) {
         int id = InformationManager.checkedParseInt(idString);
         Student student = InformationManager.getInstance().getStudentById(id);
@@ -57,6 +67,10 @@ public class ViewCommand implements Command {
         }
     }
 
+    /**
+     * Views a course information.
+     * @param idString	Course id.
+     */
     private void viewCourseInformation(String idString) {
         int id = InformationManager.checkedParseInt(idString);
         Course course = InformationManager.getInstance().getCourseById(id);
@@ -68,6 +82,10 @@ public class ViewCommand implements Command {
         }
     }
 
+    /**
+     * Views information regarding faculty member.
+     * @param idString	Faculty member id.
+     */
     private void viewFacultymember(String idString) {
         int id = InformationManager.checkedParseInt(idString);
         FacultyMember facultyMember = InformationManager.getInstance().getFacultyMemberById(id);
@@ -79,6 +97,10 @@ public class ViewCommand implements Command {
         }
     }
 
+    /**
+     * Views information regarding a faculty.
+     * @param idString	Faculty id.
+     */
     private void viewFaculty(String idString) {
         int id = InformationManager.checkedParseInt(idString);
         Faculty faculty = InformationManager.getInstance().getFacultyById(id);

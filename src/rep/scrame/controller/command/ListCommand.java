@@ -9,12 +9,33 @@ import rep.scrame.view.ScrameView;
 import rep.scrame.view.StudentListView;
 
 
+/**
+ * Lists all registered faculty, faculty members, courses, or students once invoked.
+ */
 public class ListCommand implements Command {
+	/**
+	 * Student list view representation.
+	 */
 	private ScrameView studentListView;
+	
+	/**
+	 * Course list view representation.
+	 */
 	private ScrameView courseListView;
+	
+	/**
+	 * Faculty member list view representation.
+	 */
 	private ScrameView facultyMemberListView;
+	
+	/**
+	 * Faculty list view representation.
+	 */
 	private ScrameView facultyListView;
 	
+	/**
+	 * ListCommand constructor.
+	 */
 	public ListCommand() {
 		studentListView = new StudentListView();
 		courseListView = new CourseListView();
@@ -45,6 +66,9 @@ public class ListCommand implements Command {
         }
     }
     
+    /**
+     * Displays error message.
+     */
     private void displayErrorMessage() {
         System.out.println("Command does not match any recognised use case: ls [-s | -c | -f | -fm]");
 

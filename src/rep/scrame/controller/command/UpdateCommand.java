@@ -17,7 +17,9 @@ import rep.scrame.model.Student;
 
 
 
-
+/**
+ * Updates a particular course or student.
+ */
 public class UpdateCommand implements Command {
 
     @Override
@@ -46,10 +48,17 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Displays the error message.
+     */
     private void displayErrorMessage() {
         System.out.println("Command does not match any recognised use case: upd [-s | -c | -m] id");
     }
     
+    /**
+     * Updates student information.
+     * @param idString	Id of the student.
+     */
     private void updateStudentInformationDialog(String idString) {
         int id = InformationManager.checkedParseInt(idString);
         Student student = InformationManager.getInstance().getStudentById(id);
@@ -82,6 +91,10 @@ public class UpdateCommand implements Command {
         }
     }
     
+    /**
+     * Updates student's address.
+     * @param student	The student to be updated.
+     */
     private void updateStudentAddress(Student student) {
     	System.out.format("Current addresss : %s\n", student.getAddress());
     	System.out.format("New address      : ");
@@ -91,6 +104,10 @@ public class UpdateCommand implements Command {
     	System.out.println("Student address has been successfully updated.");
     }
     
+    /**
+     * Updates student's date of birth.
+     * @param student	The student to be updated.
+     */
     private void updateStudentDateOfBirth(Student student) {
     	System.out.format("Current date of birth            : %s\n", student.getDateOfBirthAsString());
     	System.out.format("Set date of birth to (dd/mm/yyyy): ");
@@ -101,6 +118,10 @@ public class UpdateCommand implements Command {
     	System.out.println("Student date of birth has been successfully updated.");
     }
     
+    /**
+     * Updates student's date of enrollment.
+     * @param student	The student to be updated.
+     */
     private void updateStudentDateOfEnrollment(Student student) {
     	System.out.format("Current date of enrollment            : %s\n", student.getDateOfEnrollmentAsString());
     	System.out.format("Set date of enrollment to (mm/yyyy)   : ");
@@ -111,6 +132,10 @@ public class UpdateCommand implements Command {
     	System.out.println("Student date of enrollment has been successfully updated.");
     }
 
+    /**
+     * Updates student's faculty.
+     * @param student	The student to be updated.
+     */
     private void updateStudentFaculty(Student student) {
     	System.out.format("Current faculty    : %s\n", student.getFaculty().getName());
     	System.out.format("Enter the faculty of student's new faculty:\n");
@@ -124,7 +149,10 @@ public class UpdateCommand implements Command {
     }
     
 
-
+    /**
+     * Updates a course information.
+     * @param idString	Id of the course.
+     */
     private void updateCourseInformationDialog(String idString) {
         int id = InformationManager.checkedParseInt(idString);
         Course course = InformationManager.getInstance().getCourseById(id);
@@ -171,7 +199,11 @@ public class UpdateCommand implements Command {
         }
     }
 
-
+    /**
+     * Enroll student into a course. Automatically choose a lecture, lab session,
+     * and tutorial session for the student to join.
+     * @param course	The course to be udpated.
+     */
     private void enrollStudentIntoCourse(Course course) {
         System.out.print("Enter student id: ");
         Scanner scanner = SystemScannerAdapter.getInstance();
@@ -194,13 +226,23 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Enrolls student into the lecture group.
+     * @param student	Student to be enrolled.
+     * @param course	Course to be updated.
+     */
     private void enrollStudentIntoLectureGroup(Student student, Course course) {
         if(course.getLecture() != null) {
             course.getLecture().enrollStudent(student);
             System.out.format("%s %s is enrolled into the lecture group.\n", student.getFirstName(), student.getLastName());
         }
     }
-
+    
+    /**
+     * Enrolls student into any tutorial group that is vacant.
+     * @param student	Student to be enrolled.
+     * @param course	Course to be updated.
+     */
     private void enrollStudentIntoTutorialGroup(Student student, Course course) {
         if(!course.getTutorialGroups().isEmpty()) {
             for (CourseSession courseSession : course.getTutorialGroups()) {
@@ -213,6 +255,11 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Enrolls student into any lab group that is currently vacant.
+     * @param student	Student to be enrolled.
+     * @param course	Course to be updated.
+     */
     private void enrollStudentIntoLabGroup(Student student, Course course) {
         if(!course.getLabGroups().isEmpty()) {
             for (CourseSession courseSession : course.getLabGroups()) {
@@ -225,6 +272,10 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Adds a new coordinator into the course.
+     * @param course	Course to be udpated.
+     */
     private void addCoordinatorIntoCourse(Course course) {
         Scanner scanner = SystemScannerAdapter.getInstance();
         System.out.print("Enter coordinator id: ");
@@ -240,6 +291,10 @@ public class UpdateCommand implements Command {
     }
 
 
+    /**
+     * Updates the grading policy of a course.
+     * @param course	Course to be updated.
+     */
     private void updateGradingPolicy(Course course) {
         Scanner scanner = SystemScannerAdapter.getInstance();
         System.out.print("Exam weightage (%): ");
@@ -271,6 +326,11 @@ public class UpdateCommand implements Command {
         System.out.println("Grading Policy is successfully updated.");
     }
 
+    /**
+     * Add a course session.
+     * @param type		Type of course session.
+     * @param course	Course to be updated.
+     */
     private void addCourseSession(String type, Course course) {
         Scanner scanner = SystemScannerAdapter.getInstance();
         System.out.print("Enter " + type + " group name: ");
@@ -290,6 +350,9 @@ public class UpdateCommand implements Command {
         System.out.println(courseSession.getName() + " has been added successfully.");
     }
 
+    /**
+     * Updates the mark record.
+     */
     private void updateMarkRecord() {
         Scanner scanner = SystemScannerAdapter.getInstance();
         System.out.println();
@@ -324,6 +387,11 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Updates a mark of a particular student.
+     * @param course	Course which student's mark is going to be updated.
+     * @param student	Student whose mark is to be updated.
+     */
     private void markEntryOfParticularStudent(Course course, Student student) {
         Scanner scanner = SystemScannerAdapter.getInstance();
         System.out.println("Student name   : " + student.getFirstName() + " " + student.getLastName());

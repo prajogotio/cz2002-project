@@ -10,14 +10,23 @@ import rep.scrame.model.FacultyMember;
 
 
 
-
+/**
+ * An interface to interpret an add command.
+ */
 public class AddCommand implements Command {
+	/**
+	 * The CommandInterpreter context of this add command.
+	 */
     private CommandInterpreter context;
 
+    /**
+     * Displays error message.
+     */
     private void displayErrorMessage() {
         System.out.println("Command does not match any recognised use case: add [-s | -c | -fm]");
     }
     
+  
     @Override
     public void invoke(CommandInterpreter context, StringTokenizer tokens) {
         String domain;
@@ -40,6 +49,9 @@ public class AddCommand implements Command {
         }
     }
 
+    /**
+     * Displays add course dialog activity.
+     */
     private void displayAddCourseDialog() {
         System.out.println();
         Scanner scanner = SystemScannerAdapter.getInstance();
@@ -64,6 +76,9 @@ public class AddCommand implements Command {
         }
     }
 
+    /**
+     * Displays add student dialog activity.
+     */
     private void displayAddStudentDialog() {
         System.out.println();
         Scanner scanner = SystemScannerAdapter.getInstance();
@@ -93,6 +108,9 @@ public class AddCommand implements Command {
         System.out.println("Student added successfully.");
     }
 
+    /**
+     * Displays add faculty member dialog activity.
+     */
     private void displayAddFacultyMemberDialog() {
         System.out.println();
         Scanner scanner = SystemScannerAdapter.getInstance();

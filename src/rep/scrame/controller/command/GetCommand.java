@@ -14,7 +14,10 @@ import rep.scrame.view.ScrameView;
 import rep.scrame.view.SessionStudentList;
 import rep.scrame.view.StudentTranscript;
 
-
+/**
+ * A command that handles "get" input command. It is used to 
+ * retrieves a student's transcript or a course statistics.
+ */
 public class GetCommand implements Command {
 
     @Override
@@ -35,11 +38,18 @@ public class GetCommand implements Command {
         }
     }
 
+    /**
+     * Prints an error message.
+     */
     private void printErrorMessage() {
         System.out.println("Command does not match any recognised use case: get [ -t | -s] id");
     }
 
-
+    /**
+     * Gets the student transcript.
+     * @param context	CommandInterpreter context.
+     * @param tokens	Tokenizer of the current input command.
+     */
     private void getStudentTranscipt(CommandInterpreter context, StringTokenizer tokens) {
         String idString;
         if(tokens.hasMoreTokens()) {
@@ -58,6 +68,11 @@ public class GetCommand implements Command {
         transcript.display();
     }
 
+    /**
+    * Gets the course statistics.
+     * @param context	CommandInterpreter context.
+     * @param tokens	Tokenizer of the current input command.
+     */
     public void getCourseInformation(CommandInterpreter context, StringTokenizer tokens) {
         String idString;
         if(tokens.hasMoreTokens()) {
@@ -97,6 +112,10 @@ public class GetCommand implements Command {
         }
     }
     
+    /**
+     * Displays student list.
+     * @param course	Course for which the student list is to be displayed.
+     */
     private void displayStudentList(Course course) {
     	ArrayList<Student> enrolled = course.getEnrolledStudents();
     	ArrayList<Student> waitlist = course.getWaitList();
@@ -119,7 +138,12 @@ public class GetCommand implements Command {
     	}
     	
     }
-
+    
+    /**
+     * Displays the list of course sessions and asks the user to choose.
+     * @param course	The course which the course sessions are to be display.
+     * @param type		Type of the course session.
+     */
     private void chooseCourseSession(Course course, String type) {
         ArrayList<CourseSession> courseSessions = new ArrayList<CourseSession>();
         if (type.equals("tutorial")) {
@@ -146,6 +170,10 @@ public class GetCommand implements Command {
         }
     }
 
+    /**
+     * Displays the student list in the course session.
+     * @param courseSession	Course session which student list is to be displayed.
+     */
     private void displayStudentList(CourseSession courseSession) {
         if(courseSession == null) {
             System.out.println("The course does not have the requested session.");
@@ -155,6 +183,10 @@ public class GetCommand implements Command {
         studentList.display();
     }
     
+    /**
+     * Displays the course statistics.
+     * @param course	The course which statistics are to be displayed.
+     */
     private void displayCourseStatistic(Course course) {
     	ScrameView courseStatistic = new CourseStatistic(course);
     	courseStatistic.display();
