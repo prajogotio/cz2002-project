@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import rep.scrame.controller.InformationManager;
 import rep.scrame.model.FacultyMember;
 
+/**
+ * List of all faculty member in the system displayed in a certain format.
+ */
 public class FacultyMemberListView extends ListView {
-
+	/**
+	 * FacultyMemberListView constructor.
+	 */
 	public FacultyMemberListView() {super(InformationManager.getInstance().getFacultyMembers());}
 	
 	/*
@@ -36,8 +41,9 @@ public class FacultyMemberListView extends ListView {
 		return result;
 	}
 	
+	@Override
 	protected String formatHeader(){
 		String result = "  id  first name            last name            NRIC            faculty                                              status\n--------------------------------------------------------------------------------------------------------------------------------------------------";
-	return result;
+		return result;
 	}
 }

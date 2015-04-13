@@ -4,10 +4,21 @@ import rep.scrame.controller.InformationManager;
 import rep.scrame.model.Course;
 import rep.scrame.model.Faculty;
 
+
+/**
+ *	View the information regarding a faculty.
+ */
 public class FacultyInformationView implements ScrameView {
 
+	/**
+	 * The faculty to be viewed.
+	 */
 	private Faculty faculty;
 	
+	/**
+	 * FacultyInformationView constructor.
+	 * @param faculty	The faculty to be viewed.
+	 */
 	public FacultyInformationView(Faculty faculty) {
 		this.faculty = faculty;
 	}

@@ -4,9 +4,13 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 
 /**
- * Created by prajogotio on 22/3/15.
+ * The adapter patter for managing calendar interface. It adapts our system interface
+ * with java.util.Calendar interface.
  */
 public class DateAdapter {
+	/**
+	 * The constants used to identify the months.
+	 */
     private static int[] MONTH = new int[12];
     static {
         MONTH[0] = Calendar.JANUARY;
@@ -23,6 +27,11 @@ public class DateAdapter {
         MONTH[11] = Calendar.DECEMBER;
     }
 
+    /**
+     * Gets the calendar representation of the date string.
+     * @param ddmmyyyy Date strings to be converted.
+     * @return	Calendar object after conversion.
+     */
     public static Calendar getCalendar(String ddmmyyyy) {
         Calendar calendar = Calendar.getInstance();
         StringTokenizer st = new StringTokenizer(ddmmyyyy, "/");
@@ -39,6 +48,11 @@ public class DateAdapter {
         return calendar;
     }
 
+    /**
+     * Gets the month as expected by Calendar interface.
+     * @param mm	The month index.
+     * @return	corresponding Calendar month constant.
+     */
     private static int getMonth(int mm) {
         if(mm-1 < 0 || mm-1 > 11) return 0;
         return MONTH[mm-1];

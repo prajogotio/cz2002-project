@@ -5,9 +5,19 @@ import java.util.ArrayList;
 import rep.scrame.model.Course;
 import rep.scrame.model.Student;
 
+/**
+ * 	displays the information regarding a student in a detailed manner.
+ */
 public class StudentInformationView implements ScrameView{
+	/**
+	 * The student whose information is going to be displayed.
+	 */
 	private Student student;
 	
+	/**
+	 * Constructor of StudentInformationView.
+	 * @param student  The student whose information is going to be displayed.
+	 */
 	public StudentInformationView(Student student) {
 		this.student = student;
 	}

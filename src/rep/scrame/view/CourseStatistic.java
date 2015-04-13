@@ -7,9 +7,21 @@ import rep.scrame.model.Course;
 import rep.scrame.model.MarkRecord;
 import rep.scrame.model.Student;
 
+
+/**
+ * The course statistic view. Displays statistics such as the marks distribution, number of students enrolled,
+ * and so on.
+ */
 public class CourseStatistic implements ScrameView{
+	/**
+	 * The course which statistics is to be displayed.
+	 */
 	private Course course;
 	
+	/**
+	 * CourseStatistics constructor.
+	 * @param course	 The course which statistics is to be displayed.
+	 */
 	public CourseStatistic(Course course) {
 		this.course = course;
 	}
@@ -39,6 +51,10 @@ public class CourseStatistic implements ScrameView{
 	}
 	
 	
+	/**
+	 * Prints the student assessment mark in a certain table format.
+	 * @param assessment	The assessment to be displayed.
+	 */
 	private void printStudentAssessmentMark(Assessment assessment) {
 		ArrayList<Student> students = course.getEnrolledStudents();
 		
@@ -56,6 +72,9 @@ public class CourseStatistic implements ScrameView{
 		System.out.format("\nMean   : %5.2f\n", average);
 	}
 	
+	/**
+	 * Prints the student course work in a certain table format.
+	 */
 	private void printStudentCourseWorkMark() {
 		ArrayList<Student> students = course.getEnrolledStudents();
 		

@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import rep.scrame.controller.InformationManager;
 import rep.scrame.model.Student;
 
+/**
+ * Displays the list of students registered in the system.
+ */
 public class StudentListView extends ListView{
-
+	
+	/**
+	 * Constructor of StudentListView.
+	 */
 	public StudentListView() { super(InformationManager.getInstance().getStudents());}
 	
 	/*

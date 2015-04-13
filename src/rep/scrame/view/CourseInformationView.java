@@ -6,9 +6,19 @@ import rep.scrame.model.Course;
 import rep.scrame.model.CourseSession;
 import rep.scrame.model.FacultyMember;
 
+/**
+ * Course information view. Displays the detailed information of a course.
+ */
 public class CourseInformationView implements ScrameView{
+	/**
+	 * The course instance to be viewed.
+	 */
 	private Course course;
 	
+	/**
+	 * CourseInformationView constructor.
+	 * @param course	The course to be viewed.
+	 */
 	public CourseInformationView(Course course) {
 		this.course = course;
 	}

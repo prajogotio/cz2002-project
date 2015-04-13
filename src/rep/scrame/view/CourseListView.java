@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import rep.scrame.controller.InformationManager;
 import rep.scrame.model.Course;
 
+/**
+ *	The course list view class. Manages the table view of all courses.
+ */
 public class CourseListView extends ListView{
-
+	/**
+	 * CourseListView constructor.
+	 */
 	public CourseListView() {super(InformationManager.getInstance().getCourses());}
 	
 	/*

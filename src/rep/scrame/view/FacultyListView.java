@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import rep.scrame.controller.InformationManager;
 import rep.scrame.model.Faculty;
 
-public class FacultyListView extends ListView{
 
+/**
+ * Display the faculty list of all faculties in the system.
+ */
+public class FacultyListView extends ListView{
+	/**
+	 * Constructor of FacultyListView.
+	 */
 	public FacultyListView() { super(InformationManager.getInstance().getFaculties());}
 	
 	/*

@@ -6,9 +6,19 @@ import rep.scrame.controller.InformationManager;
 import rep.scrame.model.CourseSession;
 import rep.scrame.model.Student;
 
+/**
+ * Displays the session student list in a certain format.
+ */
 public class SessionStudentList implements ScrameView{
+	/**
+	 * The course session which students are going to be listed down.
+	 */
 	private CourseSession courseSession;
 	
+	/**
+	 * The constructor of SessionStudentList.
+	 * @param courseSession	The course session which students are going to be listed down.
+	 */
 	public SessionStudentList(CourseSession courseSession) {
 		this.courseSession = courseSession;
 	}

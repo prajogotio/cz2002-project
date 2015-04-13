@@ -2,9 +2,19 @@ package rep.scrame.view;
 
 import rep.scrame.model.FacultyMember;
 
+/**
+ *	Displays the faculty member information in a certain format.
+ */
 public class FacultyMemberInformationView implements ScrameView{
+	/**
+	 * The faculty whose information is to be displayed.
+	 */
 	private FacultyMember facultyMember;
 	
+	/**
+	 * FacultyMemberInformationView constructor
+	 * @param facultyMember	The faculty whose information is to be displayed.
+	 */
 	public FacultyMemberInformationView(FacultyMember facultyMember) {
 		this.facultyMember = facultyMember;
 	}

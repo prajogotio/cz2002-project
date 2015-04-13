@@ -8,10 +8,19 @@ import rep.scrame.model.CourseGrading;
 import rep.scrame.model.MarkRecord;
 import rep.scrame.model.Student;
 
+/**
+ * Displays the student transcript.
+ */
 public class StudentTranscript implements ScrameView {
-
+	/**
+	 * Student whose transcript is to be displayed.
+	 */
 	private Student student;
 	
+	/**
+	 * Constructor of StudentTranscript
+	 * @param student	Student whose transcript is to be displayed.
+	 */
 	public StudentTranscript(Student student) {
 		this.student = student;
 	}
