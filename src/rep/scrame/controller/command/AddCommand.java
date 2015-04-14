@@ -142,7 +142,7 @@ public class AddCommand implements Command {
         System.out.print("position id: ");
         String status = scanner.nextLine();
 
-        InformationManager.getInstance().createNewFacultyMember(firstName, lastName, NRIC, dateOfBirth, address, phoneNumber, facultyId, status);
+        InformationManager.getInstance().createNewFacultyMember(firstName, lastName, NRIC, dateOfBirth, address, phoneNumber, status, facultyId);
         System.out.println("Faculty member added successfully.");
     }
 
